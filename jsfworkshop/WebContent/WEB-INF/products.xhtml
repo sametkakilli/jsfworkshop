@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head>
+  <title><ui:insert name="title">Ürünler</ui:insert></title>
+  <h:outputStylesheet library="css" name="default.css"></h:outputStylesheet>
+</h:head>
+
+<body>
+
+<div id="header">
+    <ui:insert name="header">
+    	<ui:include src="sayfa_basligi.xhtml"/>
+    </ui:insert>
+</div>
+<div id="page">
+	<table align="right">
+	<tr>
+		<td>#{cartBean.getSumOfCartPrice()} TL</td>
+	</tr>
+	<tr>
+		<td><a href="cart.xhtml?faces-sendredirect=true"><img src="resources/images/cart.gif" alt=""/></a></td>
+	</tr>
+</table>
+	  <ui:insert name="content">
+		  <ui:repeat var="product" value="#{productBean.getAllProduct()}">
+		  		<ul class="menu1">
+						<li><div class="shadow" >
+							<img src="resources/images/products/#{product.getProductId()}.jpg" alt="" />
+							<span class="baslik"></span>
+							<span class="link"><h:form>
+								<c:if test="#{not empty customerBean.name}">
+									<h:commandLink value="#{product.productName}" actionListener="#{cartBean.setSelectedProduct}">
+										<f:attribute name="productName" value="#{product.getProductName()}"></f:attribute>
+										<f:attribute name="productPrice" value="#{product.getProductPrice()}"></f:attribute>
+										<f:attribute name="productId" value="#{product.getProductId()}"></f:attribute>
+										<f:attribute name="categoryId" value="#{product.getCategoryId()}"></f:attribute>
+										<f:attribute name="customerId" value="#{customerBean.getCustomerId()}"></f:attribute>
+										<br> #{product.productPrice} TL Sepete Ekle</br>
+									</h:commandLink>
+								</c:if>
+								<c:if test="#{empty customerBean.name}">
+									<h:commandLink value="#{product.productName}" action="login.xhtml?faces-redirect=true">
+									<br> #{product.productPrice} TL Sepete Ekle</br>
+									</h:commandLink>
+								</c:if>
+								</h:form> </span>
+						</div></li>
+					</ul>
+		  </ui:repeat>
+	  </ui:insert>
+</div>
+<div id="footer">
+  <ui:insert name="footer">
+    	<ui:include src="sayfa_alti.xhtml"/>
+  </ui:insert>
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<body>
+	<div id="sayfa_basligi">
+		<div id="logo">
+			<h1>
+				<a href="#">Alisveris </a>
+			</h1>
+		</div>
+		<div id="menu"><ul>
+			<h:form>
+			<li><h:commandLink value="Anasayfa" action="index.xhtml?faces-redirect=true" accesskey="1"></h:commandLink></li>
+			<li><h:commandLink value="Hakkımızda" action="#" accesskey="2"></h:commandLink></li>
+			<li><h:commandLink value="İletişim" action="#" accesskey="3"></h:commandLink></li>
+			<c:if test="#{not empty customerBean.surname}">
+			<li><h:commandLink value="#{customerBean.name}" action="userpage.xhtml?faces-redirect=true" accesskey="4"></h:commandLink></li>
+			<li><h:commandLink value="Çıkış" action="#{customerBean.logout}" accesskey="5"></h:commandLink></li>
+			</c:if>
+			<c:if test="#{empty customerBean.surname}">
+			<li><h:commandLink value="Giriş" action="login.xhtml?faces-redirect=true" accesskey="4"></h:commandLink></li>
+			</c:if>
+			</h:form>
+		</ul></div>
+	</div>
+	<!-- end header -->
+	<div id="gallery">
+		<div id="top-photo">
+			<p>
+				<img src="resources/images/img8.png" alt="" width="830"
+					height="300" />
+			</p>
+		</div>
+	</div>
+</body>
+</html>
